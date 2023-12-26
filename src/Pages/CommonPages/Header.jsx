@@ -1,7 +1,7 @@
 export default function Header() {
   return (
     <header>
-      <nav className="max-w-6xl mx-auto p-6 flex items-center justify-between">
+      <nav className="max-w-6xl shadow-2xl my-6 mx-auto p-6 flex items-center justify-between">
         <div>
           <h2 className="font-bold text-xl">
             Cuisine corner <br />
