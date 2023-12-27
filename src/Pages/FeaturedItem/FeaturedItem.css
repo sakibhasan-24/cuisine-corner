@@ -1,0 +1,5 @@
+.featured-items {
+  background: url("../../../src/assets/home/featured.jpg");
+  opacity: 0.8;
+  filter: brightness(50%);
+}
