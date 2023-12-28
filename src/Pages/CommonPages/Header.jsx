@@ -17,9 +17,9 @@ export default function Header() {
           <Link to="/menu" className="p-2 font-bold">
             Menu
           </Link>
-          <a href="#" className="p-2 font-bold">
-            About
-          </a>
+          <Link to="/order" className="p-2 font-bold">
+            Order
+          </Link>
           <a href="#" className="p-2 font-bold">
             Contact
           </a>
