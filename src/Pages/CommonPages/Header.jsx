@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Header() {
   return (
     <header>
@@ -12,9 +14,9 @@ export default function Header() {
           <a href="#" className="p-2 font-bold">
             Home
           </a>
-          <a href="#" className="p-2 font-bold">
+          <Link to="/menu" className="p-2 font-bold">
             Menu
-          </a>
+          </Link>
           <a href="#" className="p-2 font-bold">
             About
           </a>
