@@ -4,6 +4,8 @@ import coverImg from "../../assets/shop/banner2.jpg";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../Hooks/useMenu";
+import FoodCart from "../Menu/menu/FoodCart";
+import OrderTab from "./OrderTab";
 export default function Order() {
   const [tabIndex, setTabIndex] = useState(0);
   const [menus] = useMenu();
@@ -21,15 +23,24 @@ export default function Order() {
             <Tab>Salad</Tab>
             <Tab>Soup</Tab>
             <Tab>Pizza </Tab>
-            <Tab>Drinks </Tab>
-            <Tab>Desserts</Tab>
+            <Tab>Desserts </Tab>
+            <Tab>Offered</Tab>
           </TabList>
 
           <TabPanel>
-            <h2>Any content 1</h2>
+            <OrderTab items={salads} />
           </TabPanel>
           <TabPanel>
-            <h2>Any content 2</h2>
+            <OrderTab items={soup} />
+          </TabPanel>
+          <TabPanel>
+            <OrderTab items={pizzas} />
+          </TabPanel>
+          <TabPanel>
+            <OrderTab items={deserts} />
+          </TabPanel>
+          <TabPanel>
+            <OrderTab items={offered} />
           </TabPanel>
         </Tabs>
       </div>
