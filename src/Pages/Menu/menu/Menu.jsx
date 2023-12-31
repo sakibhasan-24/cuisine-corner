@@ -27,10 +27,10 @@ export default function Menu() {
       {/*  */}
       <MenuCategory items={offered} />
       {/* pizzas */}
-      <MenuCategory items={pizzas} title={"Pizzas"} img={pizzaImg} />
-      <MenuCategory items={salads} title={"Salads"} img={saladImg} />
-      <MenuCategory items={soup} title={"Soups"} img={soupImg} />
-      <MenuCategory items={deserts} title={"Deserts"} img={desertImg} />
+      <MenuCategory items={pizzas} title={"pizzas"} img={pizzaImg} />
+      <MenuCategory items={salads} title={"salads"} img={saladImg} />
+      <MenuCategory items={soup} title={"soups"} img={soupImg} />
+      <MenuCategory items={deserts} title={"desserts"} img={desertImg} />
     </div>
   );
 }

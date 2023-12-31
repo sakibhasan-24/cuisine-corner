@@ -4,10 +4,16 @@ import coverImg from "../../assets/shop/banner2.jpg";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import useMenu from "../../Hooks/useMenu";
-import FoodCart from "../Menu/menu/FoodCart";
+
 import OrderTab from "./OrderTab";
+import { useParams } from "react-router-dom";
 export default function Order() {
-  const [tabIndex, setTabIndex] = useState(0);
+  const data = ["salad", "soups", "pizzas", "desserts", "Offered"];
+  const { category } = useParams();
+  // console.log(category);
+  const initialIndex = data.indexOf(category);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+
   const [menus] = useMenu();
   const deserts = menus.filter((menu) => menu.category === "dessert");
   const pizzas = menus.filter((menu) => menu.category === "pizza");
@@ -20,11 +26,11 @@ export default function Order() {
       <div className="my-6 flex items-center justify-center gap-6">
         <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
           <TabList>
-            <Tab>Salad</Tab>
-            <Tab>Soup</Tab>
-            <Tab>Pizza </Tab>
-            <Tab>Desserts </Tab>
-            <Tab>Offered</Tab>
+            <Tab>salads</Tab>
+            <Tab>soup</Tab>
+            <Tab>pizzas </Tab>
+            <Tab>deserts </Tab>
+            <Tab>offered</Tab>
           </TabList>
 
           <TabPanel>
