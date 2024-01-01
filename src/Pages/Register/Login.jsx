@@ -1,12 +1,36 @@
-import React from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  LoadCanvasTemplateNoReload,
+  validateCaptcha,
+} from "react-simple-captcha";
 
 export default function Login() {
+  const currentRef = useRef(null);
+  const [disabled, setDisabled] = useState(true);
+  const [captcha, setCaptcha] = useState("");
+  //   console.log(captcha);
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
+
     // console.log(email, password);
+  };
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleValidate = () => {
+    const value = currentRef.current.value;
+    // console.log(value);
+    if (validateCaptcha(value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
   };
   return (
     <div className="max-w-6xl mx-auto my-12 ">
@@ -32,9 +56,27 @@ export default function Login() {
             placeholder="password..."
             className="border-0 w-full focus:outline-none bg-slate-300 rounded-lg py-4 px-3 text-gray-700"
           />
+          <LoadCanvasTemplate />
+          <input
+            type="captcha"
+            name="captcha"
+            id="captcha"
+            placeholder="captcha..."
+            ref={currentRef}
+            className="border-0 w-1/4 mx-auto focus:outline-none bg-slate-300 rounded-lg py-2 px-3 text-gray-700"
+          />
+          <button
+            type="button"
+            className="w-1/4 mx-auto bg-slate-100 text-slate-800 py-1 px-4 rounded-lg hover:bg-slate-500 font-bold"
+            onClick={handleValidate}
+          >
+            validate
+          </button>
+
           <input
             type="submit"
-            value="Login"
+            disabled={disabled}
+            value={disabled ? "not validate yet..." : "submit"}
             className="bg-slate-100 w-1/3 mx-auto cursor-pointer text-slate-800 py-4 px-8 rounded-lg hover:bg-slate-500 font-bold uppercase transition-colors duration-300"
           />
         </form>
