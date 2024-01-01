@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   loadCaptchaEnginge,
@@ -6,11 +6,14 @@ import {
   LoadCanvasTemplateNoReload,
   validateCaptcha,
 } from "react-simple-captcha";
+import { AuthContext } from "../../context/AuthProvider";
+import Swal from "sweetalert2";
 
 export default function Login() {
   const currentRef = useRef(null);
   const [disabled, setDisabled] = useState(true);
   const [captcha, setCaptcha] = useState("");
+  const { userLogIn } = useContext(AuthContext);
   //   console.log(captcha);
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,6 +22,12 @@ export default function Login() {
     const password = form.password.value;
 
     // console.log(email, password);
+    userLogIn(email, password).then((result) => {
+      const user = result.user;
+      //   console.log(user);
+      form.reset();
+      Swal.fire("Login Successfully", "", "success");
+    });
   };
   useEffect(() => {
     loadCaptchaEnginge(6);

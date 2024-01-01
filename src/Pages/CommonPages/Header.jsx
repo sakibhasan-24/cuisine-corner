@@ -1,6 +1,15 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthProvider";
+import Swal from "sweetalert2";
 
 export default function Header() {
+  const { user, userLogOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    userLogOut().then(() => {
+      Swal.fire("Logout", "User Logout Successfully", "success");
+    });
+  };
   return (
     <header>
       <nav className="max-w-6xl shadow-2xl my-6 mx-auto p-6 flex items-center justify-between">
@@ -23,9 +32,15 @@ export default function Header() {
           <a href="#" className="p-2 font-bold">
             Contact
           </a>
-          <Link to="/login" className="p-2 font-bold">
-            Login
-          </Link>
+          {user ? (
+            <Link onClick={handleLogOut} to="/login" className="p-2 font-bold">
+              LogOut
+            </Link>
+          ) : (
+            <Link to="/login" className="p-2 font-bold">
+              Login
+            </Link>
+          )}
         </div>
       </nav>
     </header>
