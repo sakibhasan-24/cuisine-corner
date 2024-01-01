@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -80,6 +81,12 @@ export default function Login() {
             className="bg-slate-100 w-1/3 mx-auto cursor-pointer text-slate-800 py-4 px-8 rounded-lg hover:bg-slate-500 font-bold uppercase transition-colors duration-300"
           />
         </form>
+        <p className="text-center font-semibold">
+          new here?{" "}
+          <Link className="text-blue-500" to="/signup">
+            Sign Up
+          </Link>
+        </p>
       </div>
     </div>
   );
