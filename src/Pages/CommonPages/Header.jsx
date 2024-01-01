@@ -23,9 +23,9 @@ export default function Header() {
           <a href="#" className="p-2 font-bold">
             Contact
           </a>
-          <a href="#" className="p-2 font-bold">
+          <Link to="/login" className="p-2 font-bold">
             Login
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

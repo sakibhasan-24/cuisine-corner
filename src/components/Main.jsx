@@ -1,14 +1,17 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../Pages/CommonPages/Footer";
 import Header from "../Pages/CommonPages/Header";
 
 export default function Main() {
+  const location = useLocation();
+  const hideHeaderAndFooter = location.pathname.includes("/login");
+  // console.log(hideHeaderAndFooter);
   return (
     <div>
-      <Header />
+      {!hideHeaderAndFooter && <Header />}
       <Outlet />
-      <Footer />
+      {!hideHeaderAndFooter && <Footer />}
     </div>
   );
 }
