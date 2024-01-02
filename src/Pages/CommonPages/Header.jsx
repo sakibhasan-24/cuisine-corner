@@ -1,10 +1,14 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import { IoCartOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
+import useCart from "../../Hooks/useCart";
 
 export default function Header() {
   const { user, userLogOut } = useContext(AuthContext);
+  const [data] = useCart();
+  console.log(data?.length);
   const handleLogOut = () => {
     userLogOut().then(() => {
       Swal.fire("Logout", "User Logout Successfully", "success");
@@ -33,9 +37,19 @@ export default function Header() {
             Contact
           </a>
           {user ? (
-            <Link onClick={handleLogOut} to="/login" className="p-2 font-bold">
-              LogOut
-            </Link>
+            <>
+              <Link
+                onClick={handleLogOut}
+                to="/login"
+                className="p-2 font-bold"
+              >
+                LogOut
+              </Link>
+              <button className="btn">
+                <IoCartOutline className="text-2xl" />
+                <div className="badge badge-secondary">{data?.length}+</div>
+              </button>
+            </>
           ) : (
             <Link to="/login" className="p-2 font-bold">
               Login

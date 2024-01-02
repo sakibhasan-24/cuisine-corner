@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -11,6 +11,9 @@ import Swal from "sweetalert2";
 
 export default function Login() {
   const currentRef = useRef(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
   const [disabled, setDisabled] = useState(true);
   const [captcha, setCaptcha] = useState("");
   const { userLogIn } = useContext(AuthContext);
@@ -27,6 +30,7 @@ export default function Login() {
       //   console.log(user);
       form.reset();
       Swal.fire("Login Successfully", "", "success");
+      navigate(from, { replace: true });
     });
   };
   useEffect(() => {
