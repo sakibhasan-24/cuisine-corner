@@ -45,10 +45,12 @@ export default function Header() {
               >
                 LogOut
               </Link>
-              <button className="btn">
-                <IoCartOutline className="text-2xl" />
-                <div className="badge badge-secondary">{data?.length}+</div>
-              </button>
+              <Link to="/dashboard/cart">
+                <button className="btn">
+                  <IoCartOutline className="text-2xl" />
+                  <div className="badge badge-secondary">{data?.length}+</div>
+                </button>
+              </Link>
             </>
           ) : (
             <Link to="/login" className="p-2 font-bold">
