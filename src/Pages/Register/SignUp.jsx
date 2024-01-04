@@ -1,9 +1,13 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
+import usePublicAxios from "../../Hooks/usePublicAxios";
+import Swal from "sweetalert2";
 
 export default function SignUp() {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const useAxious = usePublicAxios();
   const handleSignUp = (e) => {
     e.preventDefault();
 
@@ -23,7 +27,23 @@ export default function SignUp() {
     createUser(email, password).then((user) => {
       const currentUser = user.user;
       currentUser.displayName = name;
-      console.log(currentUser);
+      const userInfo = {
+        name: currentUser.displayName,
+        email: currentUser.email,
+      };
+      // console.log(currentUser);
+      useAxious.post("/users", userInfo).then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "SignUp Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/login");
+        }
+      });
     });
   };
   return (

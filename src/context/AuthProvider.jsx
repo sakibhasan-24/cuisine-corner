@@ -24,6 +24,7 @@ export default function AuthProvider({ children }) {
     setLoading(true);
     return signOut(auth);
   };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
