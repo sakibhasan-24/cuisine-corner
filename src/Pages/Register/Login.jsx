@@ -8,6 +8,7 @@ import {
 } from "react-simple-captcha";
 import { AuthContext } from "../../context/AuthProvider";
 import Swal from "sweetalert2";
+import GoogleLogin from "../../components/GoogleLogin";
 
 export default function Login() {
   const currentRef = useRef(null);
@@ -100,6 +101,7 @@ export default function Login() {
             Sign Up
           </Link>
         </p>
+        <GoogleLogin />
       </div>
     </div>
   );

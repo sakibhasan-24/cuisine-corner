@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 import Swal from "sweetalert2";
+import GoogleLogin from "../../components/GoogleLogin";
 
 export default function SignUp() {
   const { createUser } = useContext(AuthContext);
@@ -90,6 +91,7 @@ export default function SignUp() {
             Login
           </Link>
         </p>
+        <GoogleLogin />
       </div>
     </div>
   );
