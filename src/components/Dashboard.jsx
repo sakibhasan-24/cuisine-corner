@@ -11,8 +11,9 @@ import {
   FaUtensilSpoon,
 } from "react-icons/fa";
 import useCart from "../Hooks/useCart";
+import useAdmin from "../Hooks/useAdmin";
 export default function Dashboard() {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   const [data] = useCart();
   return (
     <div className="flex max-w-6xl mx-auto my-28">
