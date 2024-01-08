@@ -4,6 +4,7 @@ import SectionTitle from "./SectionTitle";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 export default function ManageItems() {
   const [menus, , refetch] = useMenu();
@@ -79,12 +80,14 @@ export default function ManageItems() {
                   </td>
                   <td>${item.price}</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">
-                      <FaEdit
-                        className="text-lg font-bold text-orange-500"
-                        title="update"
-                      />
-                    </button>
+                    <Link to={`/dashboard/update/${item._id}`}>
+                      <button className="btn btn-ghost btn-xs">
+                        <FaEdit
+                          className="text-lg font-bold text-orange-500"
+                          title="update"
+                        />
+                      </button>
+                    </Link>
                   </th>
                   <th>
                     <button
