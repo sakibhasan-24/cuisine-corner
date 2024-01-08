@@ -16,7 +16,7 @@ export default function Dashboard() {
   const [isAdmin] = useAdmin();
   const [data] = useCart();
   return (
-    <div className="flex max-w-6xl mx-auto my-28">
+    <div className="flex max-w-6xl mx-auto ">
       <div className="w-64 min-h-full  bg-orange-400 ">
         <ul className=" text-slate-900 font-bold p-8 space-y-4 ">
           {isAdmin ? (

@@ -11,6 +11,7 @@ import Allusers from "../components/Allusers";
 import AdminRoute from "./AdminRoute";
 import AddItems from "../components/AddItems";
 import Protected from "./Protected";
+import ManageItems from "../components/ManageItems";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AddItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manageItems",
+        element: (
+          <AdminRoute>
+            <ManageItems />
           </AdminRoute>
         ),
       },
