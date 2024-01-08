@@ -2,9 +2,38 @@ import React from "react";
 import useMenu from "../Hooks/useMenu";
 import SectionTitle from "./SectionTitle";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import Swal from "sweetalert2";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 export default function ManageItems() {
-  const [menu] = useMenu();
+  const [menus, , refetch] = useMenu();
+  const axiosSecure = useAxiosSecure();
+  const handleMenuDelete = (item) => {
+    // console.log(item);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosSecure.delete(`/menu/${item._id}`);
+
+        if (res.data.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: `${item.name}  has been deleted.`,
+            icon: "success",
+            timer: 1500,
+          });
+        }
+      }
+    });
+  };
   //   console.log(menu);
   return (
     <div>
@@ -26,7 +55,7 @@ export default function ManageItems() {
               </tr>
             </thead>
             <tbody>
-              {menu?.map((item, idx) => (
+              {menus?.map((item, idx) => (
                 <tr
                   className="hover:bg-slate-500 hover:cursor-pointer hover:scale-95 hover:rounded-lg transition-all duration-300"
                   key={item._id}
@@ -58,7 +87,10 @@ export default function ManageItems() {
                     </button>
                   </th>
                   <th>
-                    <button className="btn btn-ghost btn-xs">
+                    <button
+                      onClick={() => handleMenuDelete(item)}
+                      className="btn btn-ghost btn-xs"
+                    >
                       <FaTrash
                         className="text-lg font-bold text-red-500"
                         title="delete"
