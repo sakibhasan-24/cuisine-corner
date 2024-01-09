@@ -37,7 +37,7 @@ export default function UpdateItems() {
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: "Item Update successfully",
+          text: `${data.name} Update successfully`,
           timer: 1500,
         });
       }
