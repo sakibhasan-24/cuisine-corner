@@ -13,6 +13,7 @@ import AddItems from "../components/AddItems";
 import Protected from "./Protected";
 import ManageItems from "../components/ManageItems";
 import UpdateItems from "../components/UpdateItems";
+import Payment from "../components/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/cart",
         element: <Cart />,
+      },
+      {
+        path: "/dashboard/cart/payment",
+        element: <Payment />,
       },
       {
         path: "/dashboard/users",
