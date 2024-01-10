@@ -38,11 +38,20 @@ export default function Cart() {
       <div className="flex justify-evenly items-center">
         <h1 className="text-2xl ">total items: {data?.length}</h1>
         <h1 className="text-2xl ">total price: {totalAmout}</h1>
-        <Link to="/dashboard/cart/payment">
-          <button className="bg-purple-600 font-bold px-4 py-2 rounded-lg">
+        {data.length ? (
+          <Link to="/dashboard/cart/payment">
+            <button className="bg-purple-600 font-bold px-4 py-2 rounded-lg">
+              Pay
+            </button>
+          </Link>
+        ) : (
+          <button
+            disabled
+            className="bg-purple-600 font-bold px-4 py-2 rounded-lg"
+          >
             Pay
           </button>
-        </Link>
+        )}
       </div>
 
       {/*  */}
