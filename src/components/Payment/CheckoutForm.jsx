@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useCart from "../../Hooks/useCart";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -18,17 +19,19 @@ export default function CheckoutForm() {
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const axiosSecure = useAxiosSecure();
-  const [data] = useCart();
+  const [data, refetch] = useCart();
   const { user } = useAuth();
   const totalPrice = data?.reduce((acc, item) => acc + item.price, 0);
-  console.log(totalPrice);
+  //   console.log(totalPrice);
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        console.log(res.data);
-        setClientSecret(res.data.clientSecret);
-      });
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          // console.log(res.data);
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [totalPrice]);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -75,6 +78,25 @@ export default function CheckoutForm() {
       if (paymentIntent.status === "succeeded") {
         setSuccess("Congrats! Your payment is completed.");
         setTransactionId(paymentIntent.id);
+        // now save
+        const payment = {
+          email: user.email,
+          price: totalPrice,
+          transactionId: paymentIntent.id,
+          date: new Date(),
+          cartId: data?.map((item) => item._id),
+          menuItemsId: data?.map((item) => item.menuID),
+          status: "PENDING",
+        };
+        const res = await axiosSecure.post("/payment", payment);
+        // console.log(res.data);
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Payment Successfully",
+          timer: 1500,
+        });
       }
     }
   };

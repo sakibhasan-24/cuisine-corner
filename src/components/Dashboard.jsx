@@ -66,7 +66,7 @@ export default function Dashboard() {
               </li>
               <li className="  flex  items-center gap-2 ">
                 <FaBook />
-                <NavLink to="/dashboard/booking"> Booking</NavLink>
+                <NavLink to="/dashboard/cart/paymentHistory"> Payment</NavLink>
               </li>
             </>
           )}
