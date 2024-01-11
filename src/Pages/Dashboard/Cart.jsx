@@ -9,6 +9,7 @@ export default function Cart() {
   const axiosSecure = useAxiosSecure();
   console.log(data);
   const totalAmout = data?.reduce((total, item) => total + item.price, 0);
+  // console.log(totalAmout);
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
