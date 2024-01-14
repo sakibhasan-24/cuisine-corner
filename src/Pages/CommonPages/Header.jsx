@@ -4,11 +4,13 @@ import { AuthContext } from "../../context/AuthProvider";
 import { IoCartOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 export default function Header() {
   const { user, userLogOut } = useContext(AuthContext);
   const [data] = useCart();
-  console.log(data?.length);
+  // console.log(data?.length);
+  const [isAdmin] = useAdmin();
   const handleLogOut = () => {
     userLogOut().then(() => {
       Swal.fire("Logout", "User Logout Successfully", "success");
@@ -36,6 +38,16 @@ export default function Header() {
           <a href="#" className="p-2 font-bold">
             Contact
           </a>
+          {user && isAdmin && (
+            <Link to="/dashboard/adminHome" className="p-2 font-bold">
+              Dashboard
+            </Link>
+          )}
+          {user && !isAdmin && (
+            <Link to="/dashboard/userHome" className="p-2 font-bold">
+              Dashboard
+            </Link>
+          )}
           {user ? (
             <>
               <Link
