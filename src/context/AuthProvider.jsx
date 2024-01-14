@@ -37,17 +37,19 @@ export default function AuthProvider({ children }) {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
+      // setLoading(false);
       setUser(currentUser);
       if (currentUser) {
         const userInfo = { name: currentUser.name, email: currentUser.email };
         useAxios.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("token", res.data.token);
+            setLoading(false);
           }
         });
       } else {
         localStorage.removeItem("token");
+        setLoading(false);
       }
     });
     return () => unSubscribe();

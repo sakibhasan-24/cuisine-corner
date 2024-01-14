@@ -27,7 +27,7 @@ export default function useAxiosSecure() {
       // console.log("error", error.response.status);
       if (error.response.status === 401 || error.response.status === 403) {
         userLogOut().then(() => {
-          navigate("/login");
+          // navigate("/login");
         });
       }
       return Promise.reject(error);
