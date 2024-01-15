@@ -21,7 +21,9 @@ export default function FoodCart({ items }) {
         foodName: food.name,
         price: food.price,
         image: food.image,
+        category: food.category,
       };
+      console.log(menuItems);
       axiosSecure.post("/items", menuItems).then((res) => {
         const item = res.data;
         // console.log(item);
