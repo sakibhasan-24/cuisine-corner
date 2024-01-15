@@ -8,6 +8,7 @@ import { IoFastFood } from "react-icons/io5";
 import {
   BarChart,
   Bar,
+  Sector,
   Cell,
   XAxis,
   YAxis,
@@ -52,10 +53,11 @@ export default function AdminHome() {
   };
 
   //   pie chart
-  const data = adminOrderState?.map((item) => {
+  const pieChartData = adminOrderState?.map((item) => {
     return { name: item.category, value: item.totalRevenue };
   });
-  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "red", "pink"];
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
     cx,
@@ -69,6 +71,17 @@ export default function AdminHome() {
     const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
   };
   return (
     <div>
@@ -138,7 +151,7 @@ export default function AdminHome() {
           <ResponsiveContainer width="100%" height="100%">
             <PieChart width={400} height={400}>
               <Pie
-                data={data}
+                data={pieChartData}
                 cx="50%"
                 cy="50%"
                 labelLine={false}
@@ -147,7 +160,7 @@ export default function AdminHome() {
                 fill="#8884d8"
                 dataKey="value"
               >
-                {adminOrderState.map((entry, index) => (
+                {pieChartData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
